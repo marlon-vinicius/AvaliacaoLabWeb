@@ -1,4 +1,5 @@
 const authorModel = require('./author-model');
+const bookModel = require('../book/book-model')
 
 const syncModel = async () => {
     await authorModel.sync({ force: false }); //force: true para recriar a tabela a cada inicialização
@@ -10,7 +11,14 @@ const save = async (author) => {
 };
 
 const findAll = async () => {
-    return authorModel.findAll();
+    return authorModel.findAll({
+        include: [{
+            model: bookModel,
+            as: 'books',
+            attributes: ['id', 'title']
+        }],
+        attributes: ['id', 'name', 'biography', 'birthDate']
+    });
 };
 
 const findById = async (id) => {

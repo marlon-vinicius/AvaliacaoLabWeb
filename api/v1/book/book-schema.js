@@ -4,8 +4,7 @@ const createBooksSchema = {
     payload: Joi.object({
         title: Joi.string()                
                 .required(),
-        authorId: Joi.string()
-                    .required(),
+        authorId: Joi.string().guid(),
         publishedDate: Joi.string()
                     .required(),
         isbn: Joi.string()
@@ -25,9 +24,7 @@ const getById = {
 const getBooks = {
     query: Joi.object({
         title: Joi.string(),
-        author: Joi.object({
-            name:  Joi.string()
-        })
+        author: Joi.string()
     })
 };
 

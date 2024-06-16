@@ -4,8 +4,8 @@ const create = async (autor) => {
     return repository.save(autor);
 };
 
-const list = async (filter) => {
-    return repository.findAll(filter);
+const list = async () => {
+    return repository.findAll();
 };
 
 const findById = async (id) => {

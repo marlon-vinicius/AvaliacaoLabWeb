@@ -4,7 +4,8 @@ const Author = require('../author/author-model');
 
 const Book = database.sequelize.define('Book', {
     id: {
-        type: Sequelize.UUIDV4,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
         field: 'id'
@@ -15,10 +16,11 @@ const Book = database.sequelize.define('Book', {
         field: 'title'
     },
     authorId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         field: 'authorId',
         references: {
-            model: 'Author',
+            model: 'tb_author',
             key: 'id'
         }
     },
@@ -42,6 +44,7 @@ const Book = database.sequelize.define('Book', {
     tableName: 'tb_book'
 });
 
-Book.belongsTo(Author, {foreignKey: 'authorId'});
+Book.belongsTo(Author, {foreignKey: 'authorId', as: 'author' });
+Author.hasMany(Book, { foreignKey: 'authorId', as: 'books' });
 
 module.exports = Book;

@@ -4,18 +4,12 @@ const createAuthorsSchema = {
     payload: Joi.object({
         name: Joi
                 .string()
-                .min(3)
-                .max(60)
                 .required(),
         biography: Joi
                 .string()
-                .min(3)
-                .max(60)
                 .required(),
         birthDate: Joi
                 .string()
-                .min(3)
-                .max(60)
                 .required()
     })
 };

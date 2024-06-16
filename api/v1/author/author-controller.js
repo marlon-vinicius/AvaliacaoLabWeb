@@ -1,10 +1,7 @@
 const business = require('./author-business');
 
 const getAuthors = async (request, h) => {
-    
-    const {query} = request;
-
-    const result = await business.list(query);
+    const result = await business.list();
     return h.response(result).code(200);
 };
 
@@ -30,7 +27,8 @@ const findById = async (request, h) => {
 };
 
 const deleteById = async (request, h) => {
-    const authorId = request.params.id;    
+    const authorId = request.params.id;
+   
     try {
         const result = await business.findById(authorId);        
         if (result) {

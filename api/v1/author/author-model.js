@@ -3,7 +3,8 @@ const database = require('../../../config/db');
 
 const Author = database.sequelize.define('Author', {
     id: {
-        type: Sequelize.UUIDV4,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
         field: 'id' //nome do atributo do banco

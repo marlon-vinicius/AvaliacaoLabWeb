@@ -1,8 +1,13 @@
 const bookModel = require('./book-model');
 const {Op} = require('sequelize');
-const Author = require('../author/author-model');
+const authorModel = require('../author/author-model');
+
+const syncModel = async () => {
+    await bookModel.sync({ force: false }); //force: true para recriar a tabela a cada inicialização
+};
 
 const save = async (book) => {
+    await syncModel();
     return bookModel.create(book);
 };
 
@@ -11,20 +16,20 @@ const findAll = async (filter) => {
 
     return bookModel.findAll({
         include: [{
-            model: Author,
-            required: true //inner
+            model: authorModel,
+            required: true, //inner
+            as: 'author',
+            attributes: ['id', 'name'],
+            where: (author) ? {name: {[Op.iLike]: `${author}%`}} : {}    
         }],
-        where: {
-            ...(title) ? {title: {[Op.iLike]: `${title}%`}} : {},
-            ...(author) ? {author: {[Op.iLike]:`${author.name}`}}: {}
-        }
+        where: (title) ? {title: {[Op.iLike]: `${title}%`}} : {},
     });
 };
 
 const findById = async (id) => {
     return bookModel.findOne({
         include: [ {
-            model: Author,
+            model: authorModel,
             required: false //left
         }],
         where: {
