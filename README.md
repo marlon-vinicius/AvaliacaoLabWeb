@@ -2,7 +2,7 @@
 
 ## Para executar o projeto
 
-Configurar as variáveis de ambientes de acordo com seu banco no arquivo `db.js` na pasta `config`.  
+Na raiz do projeto rodar o comando no terminal 
 
 ```
     npm install
@@ -16,6 +16,8 @@ Configurar as variáveis de ambientes de acordo com seu banco no arquivo `db.js`
 ```
 
 ### Variáveis de Ambiente
+
+Configurar as variáveis de ambientes de acordo com seu banco no arquivo `db.js` na pasta `config`.  
 
 |Variável      |Tipo   | Valor Padrão | Descrição                        | 
 |--------------|-------|--------------|----------------------------------|
